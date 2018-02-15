@@ -198,6 +198,53 @@ A working copy of a specific revision number is checked out as follows (e.g. fro
 svn checkout -r 6 file:///var/svn/repos/myproject/trunk myproject
 \end{verbatim}
 
+\question{How do I change a given log message of my repository?}
+
+Use \texttt{svnadmin setlog} with \texttt{--bypass-hooks},
+e.g. for log message of revision No. 6:
+
+\begin{verbatim}
+echo "new log message" > newlogmessage
+
+svnadmin setlog /var/svn/repos -r 6 newlogmessage --bypass-hooks
+\end{verbatim}
+
+Please notice: the \texttt{--bypass-hooks} should be used very carefully. \\
+
+Alternatively a hook called \texttt{pre-revprop-change} must be created by your administrator.
+
+In this case you can use the same command withouth the \texttt{--bypass-hooks}:
+
+\begin{verbatim}
+svnadmin setlog /var/svn/repos -r 6 newlogmessage
+\end{verbatim}
+
+%------------------------------------------------
+
+\question{How do I show the version number of my svn installation?}
+
+You can show the version number of your svn program as follows:
+
+\begin{verbatim}
+svn --version --quiet
+\end{verbatim}
+
+%------------------------------------------------
+
+\question{How do I show the version number of a given svn repository?}
+
+The version number of a given repository (i.e. svn version used to generate the repository)
+
+is contained in the \texttt{./db/format} file:
+
+\begin{verbatim}
+more /var/svn/repos/db/format
+\end{verbatim}
+
+The number listed on the first line indicates the version number as follows:
+
+2 =\textgreater \ 1.4 \ ; \  3 =\textgreater \ 1.5 \ ; \ 4 =\textgreater \ 1.6 \ ; \ 5 =\textgreater \ 1.7 \ ; \ 6 =\textgreater \ 1.8
+
 %------------------------------------------------
 
 \question{How do I archive my repository?}
@@ -226,30 +273,7 @@ svnadmin create /var/svn/repos_new
 svnadmin load /var/svn/repos_new < svn_repos.dump
 \end{verbatim}
 
-%------------------------------------------------
 
-\question{How do I change a given log message of my repository?}
-
-Use \texttt{svnadmin setlog} with \texttt{--bypass-hooks},
-e.g. for log message of revision No. 6:
-
-\begin{verbatim}
-echo "new log message" > newlogmessage
-
-svnadmin setlog /var/svn/repos -r 6 newlogmessage --bypass-hooks
-\end{verbatim}
-
-Please notice: the \texttt{--bypass-hooks} should be used very carefully. \\
-
-Alternatively a hook called \texttt{pre-revprop-change} must be created by your administrator.
-
-In this case you can use the same command withouth the \texttt{--bypass-hooks}:
-
-\begin{verbatim}
-svnadmin setlog /var/svn/repos -r 6 newlogmessage
-\end{verbatim}
-
-%------------------------------------------------
 
 
 %----------------------------------------------------------------------------------------
