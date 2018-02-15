@@ -8,16 +8,16 @@ mkdir install
 
 cp container/todonotes/todonotes.zip .
 
-unzip todonotes.zip ; rm -f todonotes.zip ; cd todonotes ; latex todonotes.ins ; cp todonotes.ins .. ; cd ..
+unzip todonotes.zip ; rm -f todonotes.zip ; cd todonotes ; latex todonotes.ins ; cp todonotes.sty .. ; cd ..
 
 
 cp container/tocloft/tocloft.zip .
 
-unzip tocloft.zip ; rm -f tocloft.zip ; cd tocloft ; latex tocloft.ins ; cp tocloft.ins .. ; cd ..
+unzip tocloft.zip ; rm -f tocloft.zip ; cd tocloft ; latex tocloft.ins ; cp tocloft.sty .. ; cd ..
 
 
 cp container/microtype/microtype.zip .
 
-unzip microtype.zip ; rm -f microtype.zip ; cd microtype ; latex microtype.ins ; cp microtype.ins .. ; cd ..
+unzip microtype.zip ; rm -f microtype.zip ; cd microtype ; latex microtype.ins ; cp microtype.sty .. ; cd ..
 
 
