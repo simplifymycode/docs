@@ -185,7 +185,67 @@ svn checkout file:///var/svn/repos/myproject/trunk myproject
 
 svn co file:///var/svn/repos/myproject/branch/anyuser myproject
 
-svn co file:///var/svn/repos/myproject/tags/Version-1.00 myproject_v1.0
+svn co file:///var/svn/repos/myproject/tags/Version-1.00 myproj_v1.0
+\end{verbatim}
+
+%------------------------------------------------
+
+\question{How do I check out a working copy of a specific revision No.?}
+
+A working copy of a specific revision number is checked out as follows (e.g. from trunk):
+
+\begin{verbatim}
+svn checkout -r 6 file:///var/svn/repos/myproject/trunk myproject
+\end{verbatim}
+
+%------------------------------------------------
+
+\question{How do I archive my repository?}
+
+Use \texttt{svnadmin dump} to export the content of your repository to a portable file:
+
+\begin{verbatim}
+svnadmin dump /var/svn/repos > svn_repos.dump
+\end{verbatim}
+
+You may also want to create a log file of your repository:
+
+\begin{verbatim}
+svn log file:///var/svn/repos > svn_repos.log
+\end{verbatim}
+
+%------------------------------------------------
+
+\question{How do I set up my repository from archive?}
+
+Use \texttt{svnadmin load} to import the content of your archive file to your repository:
+
+\begin{verbatim}
+svnadmin create /var/svn/repos_new
+
+svnadmin load /var/svn/repos_new < svn_repos.dump
+\end{verbatim}
+
+%------------------------------------------------
+
+\question{How do I change a given log message of my repository?}
+
+Use \texttt{svnadmin setlog} with \texttt{--bypass-hooks},
+e.g. for log message of revision No. 6:
+
+\begin{verbatim}
+echo "new log message" > newlogmessage
+
+svnadmin setlog /var/svn/repos -r 6 newlogmessage --bypass-hooks
+\end{verbatim}
+
+Please notice: the \texttt{--bypass-hooks} should be used very carefully. \\
+
+Alternatively a hook called \texttt{pre-revprop-change} must be created by your administrator.
+In this case you can use the same command withouth the \texttt{--bypass-hooks}:
+
+\begin{verbatim}
+svnadmin setlog /var/svn/repos -r 6 newlogmessage
 \end{verbatim}
 
 %------------------------------------------------
